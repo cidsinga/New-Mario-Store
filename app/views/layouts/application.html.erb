@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Marios</title>
+    <title>Builder</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <% content_for(:navbar) do %>
+      <li><a href="/">Home</a></li>
+      <li><a href="something/else">Something else</a></li>
+      <li><a href="etc">Etc.</a></li>
+    <% end %>
+
+    <%= flash[:alert] %>
+    <%= flash[:notice] %>
+
     <%= yield %>
   </body>
 </html>

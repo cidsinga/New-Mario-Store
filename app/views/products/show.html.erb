@@ -1,8 +1,10 @@
 <h1>Product Name: <%= @product.prod_name %></h1>
+<h2>Cost: $<%= @product.cost %></h2>
+<h2>Country of Origin: <%= @product.country_of_origin %></h2>
 
 
 <% if @product.reviews.any? %>
-  <h4>Here are the reviews for this product:</h4>
+  <h4>Here are the reviews for this product listed by the reviewers name:</h4>
 
   <% @product.reviews.each do |review| %>
     <ul>

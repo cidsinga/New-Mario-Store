@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_17_181456) do
+ActiveRecord::Schema.define(version: 2020_01_17_182137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2020_01_17_181456) do
     t.string "author"
     t.string "content_body"
     t.integer "rating"
+    t.integer "product_id"
   end
 
+  add_foreign_key "reviews", "products"
 end

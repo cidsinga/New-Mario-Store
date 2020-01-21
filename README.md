@@ -1,24 +1,26 @@
-# README
+# Mario's Store
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### By **Casey Idsinga**
 
-Things you may want to cover:
+## Description
+Project allows you to create, see, edit, and delete products.  Each product can be given reviews by individual reviewers.  The reviews are listed by the Author of the reviews name.  Landing page displays the 3 most recently added items as well as the most reviewed items.  For those interested in buying local you can search for items whose country of origin is the USA.
 
-* Ruby version
 
-* System dependencies
+## Setup/Installation Requirements
+Clone repo and run on rails via localhost:3000 in your web browser.  
 
-* Configuration
 
-* Database creation
+## Known Bugs
+While scoping has been done on the back end, it hasn't been implemented into the front end for use yet.
 
-* Database initialization
 
-* How to run the test suite
+## Technologies Used
 
-* Services (job queues, cache servers, search engines, etc.)
+_Ruby 2.5.1_
+_Rails 5.2.4_
 
-* Deployment instructions
+### License
 
-* ...
+*MIT*
+
+Copyright (c) 2020 **_Casey Idsinga_**

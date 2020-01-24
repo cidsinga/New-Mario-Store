@@ -15,7 +15,7 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      binding.pry
+      # binding.pry
       if current_user.admin === true
         flash[:notice] = "Welcome, Admin"
       else
@@ -42,6 +42,6 @@ end
 end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :admin)
+    params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :admin)
   end
 end

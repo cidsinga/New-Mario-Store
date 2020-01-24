@@ -1,11 +1,12 @@
 class ReviewsController < ApplicationController
+
   def new
     @product = Product.find(params[:product_id])
     @review = @product.reviews.new
     render :new
   end
 
-def create
+  def create
     @product = Product.find(params[:product_id])
     @review = @product.reviews.new(review_params)
     if @review.save
@@ -29,7 +30,6 @@ def create
     else
       flash[:alert] = "You do not have permission to edit reviews"
     end
-    redirect_to "/products"
   end
 
   def update
@@ -38,23 +38,22 @@ def create
       if @review.update(review_params)
         redirect_to product_path(@review.product)
       else
-        render :edit
       end
     end
   end
 
-def destroy
-  if current_user.admin === true
-    @review = Review.find(params[:id])
-    @review.destroy
-    redirect_to product_path(@review.product)
-  else
-    flash[:notice] = "You do not have those privileges"    
+  def destroy
+    if current_user.admin === true
+      @review = Review.find(params[:id])
+      @review.destroy
+      redirect_to product_path(@review.product)
+    else
+      flash[:notice] = "You do not have those privileges"
+    end
   end
-end
 
   private
-    def review_params
-      params.require(:review).permit(:author, :content_body, :rating)
-    end
+  def review_params
+    params.require(:review).permit(:author, :content_body, :rating)
+  end
 end

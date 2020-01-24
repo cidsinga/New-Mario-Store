@@ -6,23 +6,33 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
-    render :new
+    if current_user.admin === true
+      @product = Product.new
+      render :new
+    else
+      flash[:notice] = "You do not have privileges to create products"
+    end
   end
 
   def create
-    @product = Product.new(product_params)
-    if @product.save
-      flash[:notice] = "Product successfully added!"
-      redirect_to products_path
-    else
-      render :new
+    if current_user.admin === true
+      @product = Product.new(product_params)
+      if @product.save
+        flash[:notice] = "Product successfully added!"
+        redirect_to products_path
+      else
+        render :new
+      end
     end
   end
 
   def edit
-    @product = Product.find(params[:id])
-    render :edit
+    if current_user.admin === true
+      @product = Product.find(params[:id])
+      render :edit
+    else
+      flash[:notice] = "Only admin can edit products"
+    end
   end
 
   def show
@@ -40,14 +50,18 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
-    @product.destroy
-    redirect_to products_path
+    if current_user.admin === true
+      @product = Product.find(params[:id])
+      @product.destroy
+      flash[:notice] = "Product successfully Deleted"
+      redirect_to '/'
+    else
+      flash[:notice] = "Only admin can delete products"
+    end
   end
 
   private
-    def product_params
-      params.require(:product).permit(:prod_name, :cost, :country_of_origin)
-    end
-
+  def product_params
+    params.require(:product).permit(:prod_name, :cost, :country_of_origin)
+  end
 end

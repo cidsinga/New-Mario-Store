@@ -44,9 +44,13 @@ def create
   end
 
 def destroy
-  @review = Review.find(params[:id])
-  @review.destroy
-  redirect_to product_path(@review.product)
+  if current_user.admin === true
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to product_path(@review.product)
+  else
+    flash[:notice] = "You do not have those privileges"    
+  end
 end
 
   private

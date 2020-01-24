@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-before_action :authorize, only: [:index, :show]
-before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, only: [:index, :show]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -15,7 +15,6 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      # binding.pry
       if current_user.admin === true
         flash[:notice] = "Welcome, Admin"
       else
@@ -28,18 +27,31 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
     end
   end
 
+  def update
+    @user= User.find(params[:id])
+    if current_user.admin === true
+      if @user.update(user_params)
+        redirect_to users_path
+      else
+        render :edit
+      end
+    else
+      flash[:notice] = "You don't have those privileges."
+    end
+    render :show
+  end
+
   def destroy
-  session[:user_id] = nil
-  @user = User.find(params[:id])
-  @user.destroy
-  redirect_to '/'
-end
+    session[:user_id] = nil
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to '/'
+  end
 
   private
-
   def set_user
-  @user = User.find(params[:id])
-end
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :admin)

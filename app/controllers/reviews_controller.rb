@@ -22,19 +22,26 @@ def create
   end
 
   def edit
-    @product = Product.find(params[:product_id])
-    @review = Review.find(params[:id])
-    render :edit
+    if current_user.admin === true
+      @product = Product.find(params[:product_id])
+      @review = Review.find(params[:id])
+      render :edit
+    else
+      flash[:alert] = "You do not have permission to edit reviews"
+    end
+    redirect_to "/products"
   end
 
   def update
-  @review = Review.find(params[:id])
-  if @review.update(review_params)
-    redirect_to product_path(@review.product)
-  else
-    render :edit
+    if current_user.admin === true
+      @review = Review.find(params[:id])
+      if @review.update(review_params)
+        redirect_to product_path(@review.product)
+      else
+        render :edit
+      end
+    end
   end
-end
 
 def destroy
   @review = Review.find(params[:id])

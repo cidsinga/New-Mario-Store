@@ -1,13 +1,24 @@
-<h1>Products</h1>
+<h1>Most Reviewed Products</h1>
+
+<% if @most_reviewed.any? %>
+<ul>
+  <% @most_reviewed.each do |product| %>
+  <li><%= link_to product.prod_name, product_path(product) %></li>
+  <% end %>
+</ul>
+<% else %>
+<p>There are no products yet.</p>
+<% end %>
+
 
 <% if @products.any? %>
-  <ul>
-    <% @products.each do |product| %>
-      <li><%= link_to product.prod_name, product_path(product) %></li>
-    <% end %>
-  </ul>
+<ul>
+  <% @products.each do |product| %>
+  <li><%= link_to product.prod_name, product_path(product) %></li>
+  <% end %>
+</ul>
 <% else %>
-  <p>There are no products yet.</p>
+<p>There are no products yet.</p>
 <% end %>
 
 

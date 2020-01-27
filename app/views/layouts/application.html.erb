@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Builder</title>
+    <title>Wario's Evil Emporium</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,13 @@
   </head>
 
   <body>
+    <div class="container">
+      <div class="jumobtron">
+        <h1>Wario's Evil Emporium</h1>
+
+      </div>
+
+    </div>
     <% if current_user %>
       <%= current_user.email %> | <%= link_to "Sign out", '/signout' %>
     <% else %>

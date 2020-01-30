@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    if current_user.admin === true
+    if current_user && current_user.admin == true
       @product = Product.new
       render :new
     else
@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    if current_user.admin === true
+    if current_user && current_user.admin == true
       @product = Product.new(product_params)
       if @product.save
         flash[:notice] = "Product successfully added!"
@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    if current_user.admin === true
+    if current_user && current_user.admin == true
       @product = Product.find(params[:id])
       render :edit
     else
@@ -56,7 +56,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if current_user.admin === true
+    if current_user && current_user.admin == true
       @product = Product.find(params[:id])
       @product.destroy
       flash[:notice] = "Product successfully Deleted"

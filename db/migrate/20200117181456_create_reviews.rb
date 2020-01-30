@@ -6,7 +6,7 @@ class CreateReviews < ActiveRecord::Migration[5.2]
       t.integer :rating
       t.integer :product_id
 
-      t.timestamp()
+      t.timestamps()
     end
   end
 end

@@ -1,8 +1,11 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all
-    @most_reviewed = Product.most_reviews
+    if params[:most_reviews]
+      @products = Product.most_reviews
+    else
+      @products = Product.all
+    end
     render :index
   end
 
@@ -11,6 +14,7 @@ class ProductsController < ApplicationController
       @product = Product.new
       render :new
     else
+      redirect_to '/'
       flash[:notice] = "You do not have privileges to create products"
     end
   end
@@ -32,6 +36,7 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
       render :edit
     else
+      redirect_to '/'
       flash[:notice] = "Only admin can edit products"
     end
   end
@@ -57,6 +62,7 @@ class ProductsController < ApplicationController
       flash[:notice] = "Product successfully Deleted"
       redirect_to '/'
     else
+      redirect_to '/'
       flash[:notice] = "Only admin can delete products"
     end
   end

@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+body {
+  background-color: #222222;
+  color: #f8f8f8
+}
+
+.jumobtron{
+  text-align: center;
+}

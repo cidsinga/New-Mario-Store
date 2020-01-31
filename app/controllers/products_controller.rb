@@ -1,11 +1,9 @@
 class ProductsController < ApplicationController
 
   def index
-    if params[:most_reviews]
-      @products = Product.most_reviews
-    else
+      @usa = Product.usa
       @products = Product.all
-    end
+
     render :index
   end
 
